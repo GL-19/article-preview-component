@@ -1,22 +1,16 @@
+import { useEffect, useState } from "react";
+
+import { ArticleInfo, ShareLinks } from "./components";
 import {
 	ArticlePreviewContainer,
-	ArticleData,
 	Content,
 	PreviewImage,
-	ShareLinks,
 	Footer,
-	Avatar,
-	Icon,
 	TextContainer,
+	ShareIcon,
 } from "./styles";
-import previewImage from "../../assets/images/drawers.jpg";
-import avatar from "../../assets/images/avatar-michelle.jpg";
-import shareIcon from "../../assets/images/icon-share.svg";
-import facebookIcon from "../../assets/images/icon-facebook.svg";
-import twitterIcon from "../../assets/images/icon-twitter.svg";
-import pinterestIcon from "../../assets/images/icon-pinterest.svg";
 
-import { useState } from "react";
+import shareIcon from "../../assets/images/icon-share.svg";
 
 interface ArticlePreviewProps {
 	imageSrc: string;
@@ -27,42 +21,53 @@ interface ArticlePreviewProps {
 	avatar: string;
 }
 
-function ArticlePreview() {
+function ArticlePreview({
+	imageSrc,
+	title,
+	text,
+	date,
+	author,
+	avatar,
+}: ArticlePreviewProps) {
 	const [isShareActive, setIsShareActive] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		if (window.innerWidth <= 420) {
+			setIsMobile(true);
+		} else {
+			setIsMobile(false);
+		}
+
+		const updateMedia = () => {
+			if (window.innerWidth <= 420) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+		};
+
+		window.addEventListener("resize", updateMedia);
+		return () => window.removeEventListener("resize", updateMedia);
+	}, []);
 
 	return (
 		<ArticlePreviewContainer>
-			<PreviewImage src={previewImage} alt="preview" />
+			<PreviewImage src={imageSrc} alt="preview" />
 			<Content>
 				<TextContainer>
-					<h1>
-						Shift the overall look and feel by adding these wonderful touches to furniture
-						in your home
-					</h1>
-					<p>
-						Ever been in a room and felt like something was missing? Perhaps it felt
-						slightly bare and uninviting. I’ve got some simple tips to help you make any
-						room feel complete.
-					</p>
+					<h1>{title}</h1>
+					<p>{text}</p>
 				</TextContainer>
 
-				<Footer isActive={isShareActive}>
-					{isShareActive ? (
-						<ShareLinks>
-							<p>Share</p>
-							<Icon src={facebookIcon} alt="share-icon" />
-							<Icon src={twitterIcon} alt="share-icon" />
-							<Icon src={pinterestIcon} alt="avatar" />
-						</ShareLinks>
+				<Footer isActive={isShareActive && isMobile}>
+					{isShareActive && isMobile ? (
+						<ShareLinks />
 					) : (
-						<ArticleData>
-							<Avatar src={avatar} alt="avatar" />
-							<h2>Michelle Appleton</h2>
-							<p>28 Jun 2020</p>
-						</ArticleData>
+						<ArticleInfo author={author} avatar={avatar} date={date} />
 					)}
 
-					<Icon
+					<ShareIcon
 						src={shareIcon}
 						alt="share-icon"
 						onClick={() => setIsShareActive(!isShareActive)}
