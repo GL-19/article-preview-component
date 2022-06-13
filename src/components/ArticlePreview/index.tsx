@@ -3,7 +3,7 @@ import {
 	ArticleData,
 	Content,
 	PreviewImage,
-	ShareContainer,
+	ShareLinks,
 	Footer,
 	Avatar,
 	Icon,
@@ -46,14 +46,14 @@ function ArticlePreview() {
 					</p>
 				</TextContainer>
 
-				<Footer>
+				<Footer isActive={isShareActive}>
 					{isShareActive ? (
-						<ShareContainer>
+						<ShareLinks>
 							<p>Share</p>
 							<Icon src={facebookIcon} alt="share-icon" />
 							<Icon src={twitterIcon} alt="share-icon" />
 							<Icon src={pinterestIcon} alt="avatar" />
-						</ShareContainer>
+						</ShareLinks>
 					) : (
 						<ArticleData>
 							<Avatar src={avatar} alt="avatar" />

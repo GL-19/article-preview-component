@@ -58,20 +58,26 @@ export const Content = styled.div`
 
 export const TextContainer = styled.div`
 	padding: 0 2rem;
-	margin-top: 2rem;
+	margin: 1.5rem 0;
+
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 `;
 
-export const Footer = styled.div`
+interface FooterProps {
+	isActive: boolean;
+}
+
+export const Footer = styled.div<FooterProps>`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
-	padding: 1rem 2rem;
+	padding: 0.75rem 2rem;
 
-	/* 	background-color: ${({ theme }) => theme.colors.veryDarkGrayishBlue}; */
+	background-color: ${({ theme, isActive }) =>
+		isActive ? theme.colors.veryDarkGrayishBlue : "white"};
 `;
 
 export const Avatar = styled.img`
@@ -110,7 +116,7 @@ export const ArticleData = styled.div`
 	}
 `;
 
-export const ShareContainer = styled.div`
+export const ShareLinks = styled.div`
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
