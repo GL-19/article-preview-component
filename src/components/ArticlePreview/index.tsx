@@ -1,16 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { ArticleInfo, ShareLinks } from "./components";
-import {
-	ArticlePreviewContainer,
-	Content,
-	PreviewImage,
-	Footer,
-	TextContainer,
-	ShareIcon,
-} from "./styles";
-
-import shareIcon from "../../assets/images/icon-share.svg";
+import { ArticleInfo, ShareIcon, ShareLinks } from "./components";
+import { Container, Content, PreviewImage, Footer, TextContainer } from "./styles";
 
 interface ArticlePreviewProps {
 	imageSrc: string;
@@ -29,21 +20,21 @@ function ArticlePreview({
 	author,
 	avatar,
 }: ArticlePreviewProps) {
-	const [isShareActive, setIsShareActive] = useState(false);
-	const [isMobile, setIsMobile] = useState(false);
+	const [showShareLinks, setShowShareLinks] = useState(false);
+	const [isMobile, setMobile] = useState(false);
 
 	useEffect(() => {
 		if (window.innerWidth <= 420) {
-			setIsMobile(true);
+			setMobile(true);
 		} else {
-			setIsMobile(false);
+			setMobile(false);
 		}
 
 		const updateMedia = () => {
 			if (window.innerWidth <= 420) {
-				setIsMobile(true);
+				setMobile(true);
 			} else {
-				setIsMobile(false);
+				setMobile(false);
 			}
 		};
 
@@ -52,7 +43,7 @@ function ArticlePreview({
 	}, []);
 
 	return (
-		<ArticlePreviewContainer>
+		<Container>
 			<PreviewImage src={imageSrc} alt="preview" />
 			<Content>
 				<TextContainer>
@@ -60,21 +51,17 @@ function ArticlePreview({
 					<p>{text}</p>
 				</TextContainer>
 
-				<Footer isActive={isShareActive && isMobile}>
-					{isShareActive && isMobile ? (
+				<Footer isActive={showShareLinks && isMobile}>
+					{showShareLinks && isMobile ? (
 						<ShareLinks />
 					) : (
 						<ArticleInfo author={author} avatar={avatar} date={date} />
 					)}
 
-					<ShareIcon
-						src={shareIcon}
-						alt="share-icon"
-						onClick={() => setIsShareActive(!isShareActive)}
-					/>
+					<ShareIcon onClick={() => setShowShareLinks(!showShareLinks)} />
 				</Footer>
 			</Content>
-		</ArticlePreviewContainer>
+		</Container>
 	);
 }
 

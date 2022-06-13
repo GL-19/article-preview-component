@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ArticlePreviewContainer = styled.div`
+export const Container = styled.div`
 	max-width: 720px;
 
 	display: flex;
@@ -30,29 +30,8 @@ export const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	h1 {
-		font-size: 1.25rem;
-		color: ${({ theme }) => theme.colors.veryDarkGrayishBlue};
-		font-weight: 700;
-	}
-
-	h2 {
-		font-size: 0.8125rem;
-		color: ${({ theme }) => theme.colors.veryDarkGrayishBlue};
-		font-weight: 700;
-	}
-
-	p {
-		font-size: 0.8125rem;
-		color: ${({ theme }) => theme.colors.desaturatedDarkBlue};
-	}
-
 	@media screen and (max-width: ${({ theme }) => theme.screenSize.mobile}) {
 		width: 100%;
-
-		h1 {
-			font-size: 1rem;
-		}
 	}
 `;
 
@@ -63,15 +42,21 @@ export const TextContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
-`;
 
-export const ShareIcon = styled.img`
-	background-color: ${({ theme }) => theme.colors.grayishBlue};
+	h1 {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: ${({ theme }) => theme.colors.veryDarkGrayishBlue};
 
-	width: 1.75rem;
-	height: 1.75rem;
-	border-radius: 100%;
-	padding: 0.33rem;
+		@media screen and (max-width: ${({ theme }) => theme.screenSize.mobile}) {
+			font-size: 1rem;
+		}
+	}
+
+	p {
+		font-size: 0.8125rem;
+		color: ${({ theme }) => theme.colors.desaturatedDarkBlue};
+	}
 `;
 
 interface FooterProps {

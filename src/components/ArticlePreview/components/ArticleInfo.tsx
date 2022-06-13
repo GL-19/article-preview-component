@@ -10,7 +10,7 @@ export function ArticleInfo({ author, avatar, date }: ArticleInfoProps) {
 	return (
 		<Container>
 			<Avatar src={avatar} alt="avatar" />
-			<h2>{author}</h2>
+			<h1>{author}</h1>
 			<p>{date}</p>
 		</Container>
 	);
@@ -37,11 +37,18 @@ const Container = styled.div`
 		grid-area: avatar;
 	}
 
-	h2 {
+	h1 {
 		grid-area: author;
+
+		font-size: 0.8125rem;
+		font-weight: 700;
+		color: ${({ theme }) => theme.colors.veryDarkGrayishBlue};
 	}
 
-	strong {
+	p {
 		grid-area: date;
+
+		font-size: 0.8125rem;
+		color: ${({ theme }) => theme.colors.desaturatedDarkBlue};
 	}
 `;

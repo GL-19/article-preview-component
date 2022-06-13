@@ -18,6 +18,10 @@ export const Icon = styled.img`
 	width: 1.33rem;
 	height: 1.33rem;
 	border-radius: 100%;
+
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 export const FacebookIcon = styled(Icon)`
@@ -34,8 +38,9 @@ export const Container = styled.div`
 	min-height: 3rem;
 
 	p {
-		color: ${({ theme }) => theme.colors.desaturatedDarkBlue};
+		font-size: 0.8125rem;
 		letter-spacing: 0.33rem;
+		color: ${({ theme }) => theme.colors.desaturatedDarkBlue};
 	}
 
 	background-color: ${({ theme }) => theme.colors.veryDarkGrayishBlue};
