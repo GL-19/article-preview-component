@@ -3,12 +3,14 @@ import styled from "styled-components";
 export const Container = styled.div`
 	max-width: 720px;
 
+	position: relative;
+
 	display: flex;
 	justify-content: center;
 	align-content: center;
+	overflow: hidden;
 
 	border-radius: 10px;
-	overflow: hidden;
 	background-color: white;
 
 	@media screen and (max-width: ${({ theme }) => theme.screenSize.mobile}) {
@@ -21,7 +23,7 @@ export const PreviewImage = styled.img`
 
 	@media screen and (max-width: ${({ theme }) => theme.screenSize.mobile}) {
 		width: 100%;
-	} ;
+	}
 `;
 
 export const Content = styled.div`
@@ -72,4 +74,8 @@ export const Footer = styled.div<FooterProps>`
 
 	background-color: ${({ theme, isActive }) =>
 		isActive ? theme.colors.veryDarkGrayishBlue : "white"};
+`;
+
+export const DesktopShareContainer = styled.div`
+	position: relative;
 `;

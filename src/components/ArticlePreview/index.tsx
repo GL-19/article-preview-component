@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { ArticleInfo, ShareIcon, ShareLinks } from "./components";
-import { Container, Content, PreviewImage, Footer, TextContainer } from "./styles";
+import {
+	Container,
+	Content,
+	PreviewImage,
+	Footer,
+	TextContainer,
+	DesktopShareContainer,
+} from "./styles";
 
 interface ArticlePreviewProps {
 	imageSrc: string;
@@ -57,8 +64,10 @@ function ArticlePreview({
 					) : (
 						<ArticleInfo author={author} avatar={avatar} date={date} />
 					)}
-
-					<ShareIcon onClick={() => setShowShareLinks(!showShareLinks)} />
+					<DesktopShareContainer>
+						{showShareLinks && !isMobile && <ShareLinks />}
+						<ShareIcon onClick={() => setShowShareLinks(!showShareLinks)} />
+					</DesktopShareContainer>
 				</Footer>
 			</Content>
 		</Container>
