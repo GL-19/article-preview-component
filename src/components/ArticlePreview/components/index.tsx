@@ -1,5 +1,5 @@
 import { ArticleInfo } from "./ArticleInfo";
-import { ShareLinks } from "./ShareLinks";
+import { SocialMediaLinks } from "./SocialMediaLinks";
 import { ShareIcon } from "./ShareIcon";
 
-export { ArticleInfo, ShareLinks, ShareIcon };
+export { ArticleInfo, SocialMediaLinks, ShareIcon };

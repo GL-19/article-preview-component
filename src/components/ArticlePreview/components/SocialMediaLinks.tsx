@@ -3,7 +3,7 @@ import twitterIcon from "../../../assets/images/icon-twitter.svg";
 import pinterestIcon from "../../../assets/images/icon-pinterest.svg";
 import styled from "styled-components";
 
-export function ShareLinks() {
+export function SocialMediaLinks() {
 	return (
 		<Container>
 			<p>share</p>
@@ -30,13 +30,22 @@ export const FacebookIcon = styled(Icon)`
 `;
 
 export const Container = styled.div`
+	position: absolute;
+	margin: -70px -109px;
+	padding: 1rem 2rem;
+
+	min-width: 10rem;
+	min-height: 3rem;
+
+	background-color: ${({ theme }) => theme.colors.veryDarkGrayishBlue};
+
+	border: 1px solid ${({ theme }) => theme.colors.veryDarkGrayishBlue};
+	border-radius: 1rem;
+
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	gap: 1rem;
-
-	min-width: 10rem;
-	min-height: 3rem;
 
 	p {
 		font-size: 0.8125rem;
@@ -45,29 +54,28 @@ export const Container = styled.div`
 		color: ${({ theme }) => theme.colors.desaturatedDarkBlue};
 	}
 
-	background-color: ${({ theme }) => theme.colors.veryDarkGrayishBlue};
+	span {
+		display: block;
+		height: 20px;
+		width: 20px;
+		background-color: inherit;
+		border: inherit;
+		position: absolute;
+		bottom: -10px;
+		left: calc(50% - 10px);
+		clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+		transform: rotate(-45deg);
+		border-radius: 0 0 0 0.25em;
+	}
 
-	@media screen and (min-width: 420px) {
-		position: fixed;
-
-		margin: -70px -109px;
-
-		padding: 1rem 2rem;
-		border-radius: 1rem;
-		border: 1px solid ${({ theme }) => theme.colors.veryDarkGrayishBlue};
+	@media screen and (max-width: ${({ theme }) => theme.screenSize.mobile}) {
+		position: static;
+		padding: 0;
+		margin: 0;
+		border: none;
 
 		span {
-			display: block;
-			height: 20px;
-			width: 20px;
-			background-color: inherit;
-			border: inherit;
-			position: absolute;
-			bottom: -10px;
-			left: calc(50% - 10px);
-			clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
-			transform: rotate(-45deg);
-			border-radius: 0 0 0 0.25em;
+			display: none;
 		}
 	}
 `;

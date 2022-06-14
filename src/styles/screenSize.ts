@@ -9,5 +9,5 @@ export const screenSize = {
 	desktop: "1440px",
 	tablet: "1080px",
 	mobileLg: "720px",
-	mobile: "420px",
+	mobile: "580px",
 };

@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
+import { theme } from "../../styles/theme";
 
-import { ArticleInfo, ShareIcon, ShareLinks } from "./components";
-import {
-	Container,
-	Content,
-	PreviewImage,
-	Footer,
-	TextContainer,
-	DesktopShareContainer,
-} from "./styles";
+import { ArticleInfo, ShareIcon, SocialMediaLinks } from "./components";
+import { Container, Content, PreviewImage, Footer, TextContainer } from "./styles";
 
 interface ArticlePreviewProps {
 	imageSrc: string;
@@ -27,18 +21,20 @@ function ArticlePreview({
 	author,
 	avatar,
 }: ArticlePreviewProps) {
-	const [showShareLinks, setShowShareLinks] = useState(false);
+	const [showSocialMediaLinks, setShowSocialMediaLinks] = useState(false);
 	const [isMobile, setMobile] = useState(false);
 
 	useEffect(() => {
-		if (window.innerWidth <= 420) {
+		const screenMobileWidth = Number(theme.screenSize.mobile.split("p")[0]);
+
+		if (window.innerWidth <= screenMobileWidth) {
 			setMobile(true);
 		} else {
 			setMobile(false);
 		}
 
 		const updateMedia = () => {
-			if (window.innerWidth <= 420) {
+			if (window.innerWidth <= screenMobileWidth) {
 				setMobile(true);
 			} else {
 				setMobile(false);
@@ -58,16 +54,16 @@ function ArticlePreview({
 					<p>{text}</p>
 				</TextContainer>
 
-				<Footer isActive={showShareLinks && isMobile}>
-					{showShareLinks && isMobile ? (
-						<ShareLinks />
+				<Footer isActive={showSocialMediaLinks && isMobile}>
+					{showSocialMediaLinks && isMobile ? (
+						<SocialMediaLinks />
 					) : (
 						<ArticleInfo author={author} avatar={avatar} date={date} />
 					)}
-					<DesktopShareContainer>
-						{showShareLinks && !isMobile && <ShareLinks />}
-						<ShareIcon onClick={() => setShowShareLinks(!showShareLinks)} />
-					</DesktopShareContainer>
+					<div>
+						{showSocialMediaLinks && !isMobile && <SocialMediaLinks />}
+						<ShareIcon onClick={() => setShowSocialMediaLinks(!showSocialMediaLinks)} />
+					</div>
 				</Footer>
 			</Content>
 		</Container>

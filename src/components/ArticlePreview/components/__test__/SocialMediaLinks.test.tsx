@@ -3,14 +3,14 @@ import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
 
-import { ShareLinks } from "..";
+import { SocialMediaLinks } from "..";
 import { theme } from "../../../../styles/theme";
 
 describe("ArticleInfo Component", () => {
 	it("should render with passed props correctly", () => {
 		const screen = render(
 			<ThemeProvider theme={theme}>
-				<ShareLinks />
+				<SocialMediaLinks />
 			</ThemeProvider>
 		);
 
