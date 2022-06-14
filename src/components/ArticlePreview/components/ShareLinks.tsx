@@ -7,9 +7,9 @@ export function ShareLinks() {
 	return (
 		<Container>
 			<p>share</p>
-			<FacebookIcon src={facebookIcon} alt="share-icon" />
-			<Icon src={twitterIcon} alt="share-icon" />
-			<Icon src={pinterestIcon} alt="avatar" />
+			<FacebookIcon src={facebookIcon} alt="facebook-icon" />
+			<Icon src={twitterIcon} alt="twitter-icon" />
+			<Icon src={pinterestIcon} alt="pinterest-icon" />
 			<span></span>
 		</Container>
 	);
