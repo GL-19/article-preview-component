@@ -7,11 +7,19 @@ import { api } from "../../services/api";
 import { defaultPreviewsArray } from "../../utils/defaultPreviewsArray";
 import { theme } from "../../styles/theme";
 
-jest.mock("../../services/api");
+//Mockar a instância completa
+//jest.mock("../../services/api")
+// const mockedApi = api as jest.Mocked<typeof api>;
 
-const mockedApi = api as jest.Mocked<typeof api>;
+// Mockar o metodo da instância
+const mockedApiGet = jest.spyOn(api, "get");
 
-const response = {
+const resolvedResponse = {
+	status: 200,
+	data: defaultPreviewsArray,
+};
+
+const rejectedResponse = {
 	status: 200,
 	data: defaultPreviewsArray,
 };
@@ -19,10 +27,7 @@ const response = {
 describe("Home Page", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
-		mockedApi.get.mockResolvedValue({
-			status: 200,
-			data: defaultPreviewsArray,
-		});
+		mockedApiGet.mockResolvedValue(resolvedResponse);
 	});
 
 	it("should be able to get the articles previews from API", async () => {
@@ -32,9 +37,9 @@ describe("Home Page", () => {
 			</ThemeProvider>
 		);
 
-		expect(mockedApi.get).toHaveBeenCalled();
-		expect(mockedApi.get).toHaveBeenCalledWith("previews");
-		expect(await mockedApi.get.mock.results[0].value).toStrictEqual(response);
+		expect(mockedApiGet).toHaveBeenCalled();
+		expect(mockedApiGet).toHaveBeenCalledWith("previews");
+		expect(await mockedApiGet.mock.results[0].value).toStrictEqual(resolvedResponse);
 	});
 
 	it("should be able to display the articles previews", async () => {
@@ -53,10 +58,7 @@ describe("Home Page", () => {
 	});
 
 	it("should display an error message when the request fails", async () => {
-		mockedApi.get.mockRejectedValue({
-			status: 400,
-			error: "Mock Error",
-		});
+		mockedApiGet.mockRejectedValue(rejectedResponse);
 
 		const screen = render(
 			<ThemeProvider theme={theme}>
