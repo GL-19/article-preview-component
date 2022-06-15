@@ -76,13 +76,33 @@ describe("ArticleInfo Component", () => {
 			</ThemeProvider>
 		);
 
-		const facebookLink = screen.queryByAltText("facebook-icon");
-		const twitterLink = screen.queryByAltText("twitter-icon");
-		const pinterestLink = screen.queryByAltText("pinterest-icon");
+		const facebookIcon = screen.queryByAltText("facebook-icon");
+		const twitterIcon = screen.queryByAltText("twitter-icon");
+		const pinterestIcon = screen.queryByAltText("pinterest-icon");
 
-		expect(facebookLink).not.toBeInTheDocument();
-		expect(twitterLink).not.toBeInTheDocument();
-		expect(pinterestLink).not.toBeInTheDocument();
+		expect(facebookIcon).not.toBeInTheDocument();
+		expect(twitterIcon).not.toBeInTheDocument();
+		expect(pinterestIcon).not.toBeInTheDocument();
+	});
+
+	it("should display article info after click on share icon", () => {
+		const screen = render(
+			<ThemeProvider theme={theme}>
+				<ArticlePreview {...defaultProps} />
+			</ThemeProvider>
+		);
+
+		const shareIcon = screen.getByAltText("share-icon");
+
+		const author = screen.queryByText(defaultProps.author);
+		const avatar = screen.queryByAltText("avatar");
+		const date = screen.queryByText(defaultProps.date);
+
+		fireEvent.click(shareIcon);
+
+		expect(author).toBeInTheDocument();
+		expect(avatar).toBeInTheDocument();
+		expect(date).toBeInTheDocument();
 	});
 
 	it("should display social media links after one click on share icon, and hide after a second", () => {
@@ -96,18 +116,22 @@ describe("ArticleInfo Component", () => {
 
 		fireEvent.click(shareIcon);
 
-		expect(screen.getByAltText("facebook-icon")).toBeInTheDocument();
-		expect(screen.getByAltText("twitter-icon")).toBeInTheDocument();
-		expect(screen.getByAltText("pinterest-icon")).toBeInTheDocument();
+		const facebookIcon = screen.queryByAltText("facebook-icon");
+		const twitterIcon = screen.queryByAltText("twitter-icon");
+		const pinterestIcon = screen.queryByAltText("pinterest-icon");
+
+		expect(facebookIcon).toBeInTheDocument();
+		expect(twitterIcon).toBeInTheDocument();
+		expect(pinterestIcon).toBeInTheDocument();
 
 		fireEvent.click(shareIcon);
 
-		expect(screen.queryByAltText("facebook-icon")).not.toBeInTheDocument();
-		expect(screen.queryByAltText("twitter-icon")).not.toBeInTheDocument();
-		expect(screen.queryByAltText("pinterest-icon")).not.toBeInTheDocument();
+		expect(facebookIcon).not.toBeInTheDocument();
+		expect(twitterIcon).not.toBeInTheDocument();
+		expect(pinterestIcon).not.toBeInTheDocument();
 	});
 
-	it("should not display article info after click on share icon, if window size <= screenSize.mobile", () => {
+	it("should display social media links after one click on share icon, and hide after a second, on mobile", () => {
 		const screen = render(
 			<ThemeProvider theme={theme}>
 				<ArticlePreview {...defaultProps} />
@@ -128,13 +152,49 @@ describe("ArticleInfo Component", () => {
 
 		fireEvent.click(shareIcon);
 
-		expect(screen.getByAltText("facebook-icon")).toBeInTheDocument();
-		expect(screen.getByAltText("twitter-icon")).toBeInTheDocument();
-		expect(screen.getByAltText("pinterest-icon")).toBeInTheDocument();
+		const facebookIcon = screen.queryByAltText("facebook-icon");
+		const twitterIcon = screen.queryByAltText("twitter-icon");
+		const pinterestIcon = screen.queryByAltText("pinterest-icon");
+
+		expect(facebookIcon).toBeInTheDocument();
+		expect(twitterIcon).toBeInTheDocument();
+		expect(pinterestIcon).toBeInTheDocument();
+
+		fireEvent.click(shareIcon);
+
+		expect(facebookIcon).not.toBeInTheDocument();
+		expect(twitterIcon).not.toBeInTheDocument();
+		expect(pinterestIcon).not.toBeInTheDocument();
+	});
+
+	it("should not display article info after click on share icon, on mobile mode", () => {
+		const screen = render(
+			<ThemeProvider theme={theme}>
+				<ArticlePreview {...defaultProps} />
+			</ThemeProvider>
+		);
+
+		act(() => {
+			Object.defineProperty(window, "innerWidth", {
+				writable: true,
+				configurable: true,
+				value: 375,
+			});
+
+			window.dispatchEvent(new Event("resize"));
+		});
+
+		const shareIcon = screen.getByAltText("share-icon");
 
 		const author = screen.queryByText(defaultProps.author);
 		const avatar = screen.queryByAltText("avatar");
 		const date = screen.queryByText(defaultProps.date);
+
+		expect(author).toBeInTheDocument();
+		expect(avatar).toBeInTheDocument();
+		expect(date).toBeInTheDocument();
+
+		fireEvent.click(shareIcon);
 
 		expect(author).not.toBeInTheDocument();
 		expect(avatar).not.toBeInTheDocument();

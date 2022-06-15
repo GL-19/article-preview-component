@@ -41,10 +41,6 @@ describe("ArticleInfo Component", () => {
 			</ThemeProvider>
 		);
 
-		expect(screen.getByText(defaultProps.author)).toBeInTheDocument();
-		expect(screen.getByText(defaultProps.date)).toBeInTheDocument();
-		expect(screen.getByAltText("avatar")).toBeInTheDocument();
-
 		screen.rerender(
 			<ThemeProvider theme={theme}>
 				<ArticleInfo

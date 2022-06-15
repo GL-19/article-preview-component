@@ -14,9 +14,14 @@ describe("ArticleInfo Component", () => {
 			</ThemeProvider>
 		);
 
-		expect(screen.getByText("share")).toBeInTheDocument();
-		expect(screen.getByAltText("facebook-icon")).toBeInTheDocument();
-		expect(screen.getByAltText("twitter-icon")).toBeInTheDocument();
-		expect(screen.getByAltText("pinterest-icon")).toBeInTheDocument();
+		const shareText = screen.getByText("share");
+		const facebookIcon = screen.getByAltText("facebook-icon");
+		const twitterIcon = screen.getByAltText("twitter-icon");
+		const pinterestIcon = screen.getByAltText("pinterest-icon");
+
+		expect(shareText).toBeInTheDocument();
+		expect(facebookIcon).toBeInTheDocument();
+		expect(twitterIcon).toBeInTheDocument();
+		expect(pinterestIcon).toBeInTheDocument();
 	});
 });
