@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { ArticlePreview } from "../../components";
 import { Main } from "./styles";
-import { defaultPreviewsArray } from "../../utils/defaultPreviewsArray";
 import { api } from "../../services/api";
 
 interface ArticlePreviewData {
@@ -17,32 +16,40 @@ interface ArticlePreviewData {
 
 function Home() {
 	const [previews, setPreviews] = useState<ArticlePreviewData[]>([]);
+	const [apiRequestError, setApiRequestError] = useState(false);
 
 	useEffect(() => {
-		api
-			.get<ArticlePreviewData[]>("previews")
-			.then((response) => {
+		async function getArticlePreviews() {
+			try {
+				const response = await api.get<ArticlePreviewData[]>("previews");
 				setPreviews(response.data);
-			})
-			.catch(() => {
-				console.log("Falha na requisição");
-				// setPreviews(defaultPreviewsArray);
-			});
+				setApiRequestError(false);
+			} catch (err) {
+				console.error(err);
+				setApiRequestError(true);
+			}
+		}
+
+		getArticlePreviews();
 	}, []);
 
 	return (
 		<Main>
-			{previews.map((preview) => (
-				<ArticlePreview
-					key={preview.id}
-					imageSrc={preview.image}
-					title={preview.title}
-					text={preview.text}
-					date={preview.date}
-					author={preview.author}
-					avatar={preview.avatar}
-				/>
-			))}
+			{apiRequestError ? (
+				<h1>Falha na requisição</h1>
+			) : (
+				previews.map((preview) => (
+					<ArticlePreview
+						key={preview.id}
+						imageSrc={preview.image}
+						title={preview.title}
+						text={preview.text}
+						date={preview.date}
+						author={preview.author}
+						avatar={preview.avatar}
+					/>
+				))
+			)}
 		</Main>
 	);
 }

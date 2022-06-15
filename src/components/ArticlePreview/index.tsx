@@ -46,7 +46,7 @@ function ArticlePreview({
 	}, []);
 
 	return (
-		<Container>
+		<Container data-testid="article-preview">
 			<PreviewImage src={imageSrc} alt="preview" />
 			<Content>
 				<TextContainer>

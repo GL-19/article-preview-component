@@ -5,18 +5,10 @@ import { act } from "react-dom/test-utils";
 import { ThemeProvider } from "styled-components";
 
 import { ArticlePreview } from "..";
-import avatar from "../../assets/images/avatar-michelle.jpg";
-import preview from "../../assets/images/drawers.jpg";
 import { theme } from "../../styles/theme";
+import { defaultPreviewsArray } from "../../utils/defaultPreviewsArray";
 
-const defaultProps = {
-	author: "Test Name",
-	date: "27 de Maio de 2023",
-	title: "Test Title",
-	text: "Test Text",
-	imageSrc: preview as string,
-	avatar: avatar as string,
-};
+const defaultProps = defaultPreviewsArray[0];
 
 describe("ArticleInfo Component", () => {
 	it("should render with passed props correctly", () => {
