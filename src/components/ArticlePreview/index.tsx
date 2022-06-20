@@ -5,7 +5,7 @@ import { ArticleInfo, ShareIcon, SocialMediaLinks } from "./components";
 import { Container, Content, PreviewImage, Footer, TextContainer } from "./styles";
 
 interface ArticlePreviewProps {
-	imageSrc: string;
+	image: string;
 	title: string;
 	text: string;
 	date: string;
@@ -14,7 +14,7 @@ interface ArticlePreviewProps {
 }
 
 function ArticlePreview({
-	imageSrc,
+	image,
 	title,
 	text,
 	date,
@@ -47,7 +47,7 @@ function ArticlePreview({
 
 	return (
 		<Container data-testid="article-preview">
-			<PreviewImage src={imageSrc} alt="preview" />
+			<PreviewImage src={image} alt="preview" />
 			<Content>
 				<TextContainer>
 					<h1>{title}</h1>

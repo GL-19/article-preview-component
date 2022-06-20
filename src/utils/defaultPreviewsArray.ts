@@ -5,7 +5,7 @@ import peter from "../assets/images/avatar-peter.jpg";
 
 interface ArticlePreviewData {
 	id: string;
-	imageSrc: string;
+	image: string;
 	title: string;
 	text: string;
 	author: string;
@@ -16,7 +16,7 @@ interface ArticlePreviewData {
 export const defaultPreviewsArray: ArticlePreviewData[] = [
 	{
 		id: "1",
-		imageSrc: defaultPreviewImage,
+		image: defaultPreviewImage,
 		title: `Shift the overall look and feel by adding these wonderful touches to furniture in your home`,
 		text: `Ever been in a room and felt like something was missing? Perhaps it felt slightly bare and uninviting. I’ve got some simple tips to help you make any room feel complete.`,
 		date: "28 Jun 2020",
@@ -25,7 +25,7 @@ export const defaultPreviewsArray: ArticlePreviewData[] = [
 	},
 	{
 		id: "2",
-		imageSrc: defaultPreviewImage,
+		image: defaultPreviewImage,
 		title: `Test Title Number 2`,
 		text: `This is the text props of previews array, position number 2.`,
 		date: "12 Oct 2021",
@@ -34,7 +34,7 @@ export const defaultPreviewsArray: ArticlePreviewData[] = [
 	},
 	{
 		id: "3",
-		imageSrc: defaultPreviewImage,
+		image: defaultPreviewImage,
 		title: `Test Title Number 3`,
 		text: `This is the text props of previews array, position number 3.`,
 		date: "19 Jan 2018",

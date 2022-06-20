@@ -19,11 +19,6 @@ const resolvedResponse = {
 	data: defaultPreviewsArray,
 };
 
-const rejectedResponse = {
-	status: 200,
-	data: defaultPreviewsArray,
-};
-
 describe("Home Page", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
@@ -55,18 +50,5 @@ describe("Home Page", () => {
 		expect(articlesPreviews[0]).toHaveTextContent("Michelle Appleton");
 		expect(articlesPreviews[1]).toHaveTextContent("Cristina Ricci");
 		expect(articlesPreviews[2]).toHaveTextContent("Peter Hawk");
-	});
-
-	it("should display an error message when the request fails", async () => {
-		mockedApiGet.mockRejectedValue(rejectedResponse);
-
-		const screen = render(
-			<ThemeProvider theme={theme}>
-				<Home />
-			</ThemeProvider>
-		);
-
-		const errorMessage = await screen.findByText("Falha na requisição");
-		expect(errorMessage).toBeInTheDocument();
 	});
 });
